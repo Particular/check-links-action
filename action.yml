@@ -26,4 +26,4 @@ runs:
         CREATE_ISSUE_IN_OTHER_REPO: ${{ inputs.create-issue-in-other-repo}}
         FAIL_ON_BROKEN_LINKS: ${{ inputs.fail-on-broken-links }}
       shell: pwsh
-      run: dotnet run ${{ github.action_path }}/src/CheckLinks/CheckLinks.csproj --configuration Release
+      run: dotnet run --project ${{ github.action_path }}/src/CheckLinks/CheckLinks.csproj --configuration Release

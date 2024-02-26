@@ -1,0 +1,29 @@
+name: GitHub Link Checks
+description: Checks links on Particular private repos by cloning other repos
+inputs:
+  token:
+    description: GitHub token
+    required: true
+  create-issue:
+    description: Set to true to create an issue with the links to fix
+    required: false
+    default: 'false'
+  create-issue-in-other-repo:
+    description: Create the issue in a different repo than the one the link checks run in
+    required: false
+    default: ''
+  fail-on-broken-links:
+    description: Fail the step when broken links are detected (for CI workflows)
+    required: false
+    default: 'false'
+runs:
+  using: "composite"
+  steps:
+    - name: Run tests
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        CREATE_ISSUE: ${{ inputs.create-isue }}
+        CREATE_ISSUE_IN_OTHER_REPO: ${{ inputs.create-issue-in-other-repo}}
+        FAIL_ON_BROKEN_LINKS: ${{ inputs.fail-on-broken-links }}
+      shell: pwsh
+      run: dotnet run ${{ github.action_path }}/src/CheckLinks/CheckLinks.csproj --configuration Release

@@ -16,7 +16,7 @@ public static class AppConfig
     {
         GitHubToken = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
 
-        RepoName = Environment.GetEnvironmentVariable("GITHUB_REPOSITORY")?.Split('/').FirstOrDefault();
+        RepoName = Environment.GetEnvironmentVariable("GITHUB_REPOSITORY")?.Split('/').LastOrDefault();
 
 #if DEBUG
         RepoName ??= "StaffSuccess";
